@@ -7,8 +7,8 @@
 #define EVENT_H_
 
 struct Particle{
-    int charge[10];
-    float px[10], py[10], pz[10];
+    int charge;
+    float px, py, pz;
 };
 
 struct Event{
