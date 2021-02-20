@@ -16,8 +16,8 @@
 int read(std::ifstream &file, float &x, float &y, float &z,
           int *charge, float *px, float *py, float *pz);
 
-void dump(const int &evNum, const int &nPart, const float &x,
-          const float &y, const float &z, const int *charge,
+void dump(int evNum, int nPart, float x, float y, float z,
+          const int *charge,
           const float *px, const float *py, const float *pz);
 
 int main(int argc, char *argv[]) {
