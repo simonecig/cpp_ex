@@ -3,8 +3,11 @@
 ** reading the file and calling the dump and clear functions.
 */
 
+//  TODO fix redundant imports
+
 #include <iostream>
 #include <fstream>
+#include "Event.h"
 
 struct Event;
 struct Particle;

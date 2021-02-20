@@ -5,7 +5,6 @@
 */
 #include <fstream>
 #include "Event.h"
-#include "Particle.h"
 
 Event *read(std::ifstream &file){
     Event *ev;
@@ -26,10 +25,10 @@ Event *read(std::ifstream &file){
     ev->p = new Particle*[ev->nPart];
     for(int i = 0; i < ev->nPart; i++){
         ev->p[i] = new Particle;
-        file >> ev->p[i]->charge[i]
-             >> ev->p[i]->px[i]
-             >> ev->p[i]->py[i]
-             >> ev->p[i]->pz[i];
+        file >> ev->p[i]->charge
+             >> ev->p[i]->px
+             >> ev->p[i]->py
+             >> ev->p[i]->pz;
     }
 
     return ev;
