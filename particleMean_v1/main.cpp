@@ -1,10 +1,15 @@
 /*
 ** Create a function "main" taking the file name from the command string,
-** reading the file and calling the dump and clear functions.
-*/
+** reading the file in an event loop. Compute the number of events by
+** increasing the counter according to the return value of the add
+** function and compute the mean and rms mass from the sum of masses and saquares.
+** Print the result on the screen.
+* */
 
 #include <iostream>
 #include <fstream>
+#include <cmath>
+
 struct Event;
 struct Particle;
 
@@ -16,11 +21,13 @@ bool add(const Event &ev, float minMass, float maxMass,
 
 
 int main(int argc, char *argv[]) {
-    int acceptedEvNum = 0;
+
+    int acceptedEvNum = 0; // number of events in range
     double sumInvMass = 0;
     double sumSqInvMass = 0;
     double meanInvMass = 0;
     double rmsInvMass = 0;
+
     const float MINMASS = 0.490;
     const float MAXMASS = 0.505;
 
@@ -42,8 +49,13 @@ int main(int argc, char *argv[]) {
             acceptedEvNum++;
         clear(ev);
     }
-    meanInvMass = sumSqInvMass / acceptedEvNum;
-    rmsInvMass = 0;
+    // compute mean and rms
+    meanInvMass = sumInvMass*1.0 / acceptedEvNum;
+    rmsInvMass = sqrt( sumSqInvMass * 1.0 / acceptedEvNum -
+                       pow(meanInvMass,2) );
+
+    // print results
     std::cout << meanInvMass << "\t" << rmsInvMass << std::endl;
+
     return 0;
 }

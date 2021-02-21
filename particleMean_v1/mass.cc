@@ -1,14 +1,6 @@
 /*
 ** Create a "mass" function taking as argument a reference to const-Event
 and returning the invariant mass of the decaying particle.
-Use the following variables:
-- 2   int variables to count negative and positive particles,
-- 3 float variables for the 3 sums of the momentum components,
-- 2 float variables for the total energy sums, for the hypotheses of a
-  decaying K0 or Lambda0,
-- 2 float variables for the invariant masses, for the hypotheses of a
-  decaying K0 or Lambda0.
-Use a typedef to declare pointers to const-Particle structs.
 Loop over the particles, and for each one:
 - increase the corresponding counter, according to charge,
 - increase the 3 momentum components sum,
@@ -35,18 +27,16 @@ difference is the smallest.
 // compute energy from momentum x,y,z components and invariant mass
 double computeEnergy(const float px, const float py, const float pz,
                      const double invMass) {
-  double enX = sqrt(pow(px,2) + pow(invMass,2));
-  double enY = sqrt(pow(px,2) + pow(invMass,2));
-  double enZ = sqrt(pow(px,2) + pow(invMass,2));
-  return enX+enY+enZ;
+  double psq = pow(px,2) + pow(py,2) + pow(pz,2);
+  return sqrt(psq + pow(invMass,2));
 }
 
 // compute invariant mass from momentum x,y,z components and energy
 double computeInvM(const float px, const float py, const float pz,
-                   const double energy) {
-  double ptot = sqrt( pow(px,2) + pow(py,2) + pow(pz,2) );
-  double enTot = sqrt( pow(energy,2) - pow(ptot,2) );
-  return enTot;
+                   const float energy) {
+  double ptotSq = pow(px,2) + pow(py,2) + pow(pz,2);
+  double msq = pow(energy,2) - ptotSq;
+  return sqrt(msq);
 }
 
 const double massPion    = 0.1395706;   // GeV/c^2
@@ -67,12 +57,12 @@ double mass(const Event &ev) {
   int nPos = 0, nNeg = 0;
 
   // variables for momentum sums
-  float pxSum = 0, pySum = 0, pzSum = 0;
+  double pxSum = 0, pySum = 0, pzSum = 0;
 
   // variables for energy sums, for K0 and Lambda0
-  double enSumK = 0, enSumL;
+  double enSumK = 0, enSumL = 0;
 
-  // loop over particles - momenta
+  // loop over particles
   for(i = 0; i < nPart; i++) {
     // get particle pointer
     const part_ptr particle = particles[i];
@@ -82,25 +72,22 @@ double mass(const Event &ev) {
     pySum += particle->py;
     pzSum += particle->pz;
 
-    // update energy sums, for K0 and Lambda0 hypotheses:
-    // pion mass for K0,
-    // proton or pion mass for Lambda0,
-    // for positive or negative particles respectively
+    // update energy sums, for K0 and Lambda0 hypotheses
     enSumK += computeEnergy(particle->px, particle->py, particle->pz,
                   massPion);
-    if(particle->charge > 0)
+    if(particle->charge > 0){
       enSumL += computeEnergy(particle->px, particle->py, particle->pz, massProton);
-    else
+      // update positive track counter
+      nPos++;
+    }
+    else if(particle->charge < 0){
       enSumL += computeEnergy(particle->px, particle->py, particle->pz, massPion);
-    // update positive/negative track counters
-    if(particle->charge > 0)
-        nPos++;
-    else if(particle-> charge < 0)
+      // update negative track counter
       nNeg++;
+    }
   }
 
   // check for exactly one positive and one negative track
-  // otherwise return negative (unphysical) invariant mass
   if(nPos != 1 || nNeg != 1)
     return -1;
 
@@ -109,9 +96,9 @@ double mass(const Event &ev) {
   double mL = computeInvM(pxSum, pySum, pzSum, enSumL);
 
   // compare invariant masses with known values and return the nearest one
-  if( (mK - massK0) < (mL - massLambda0) )
+  if( std::abs((mK - massK0)) < std::abs((mL - massLambda0)) )
     return mK;
-  else if( (mL - massLambda0) < (mK - massK0) )
+  else if( std::abs((mL - massLambda0)) < std::abs((mK - massK0)) )
     return mL;
   else
     return -2;
