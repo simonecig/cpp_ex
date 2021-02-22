@@ -54,6 +54,9 @@ int main(int argc, char *argv[]) {
     rmsInvMass = sqrt( sumSqInvMass * 1.0 / acceptedEvNum -
                        pow(meanInvMass,2) );
 
+    // add back MINMASS
+    meanInvMass +=(MINMASS);
+
     // print results
     std::cout << meanInvMass << "\t" << rmsInvMass << std::endl;
 

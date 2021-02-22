@@ -10,9 +10,11 @@ bool add(const Event &ev, float minMass, float maxMass,
     // compute invariant mass of the decay particle
     double invMass = mass(ev);
 
-    // only if the the mass is in range, increase the
-    // sum of masses and squares and return true
+    // chech if mass is in range
     if( (invMass >= minMass) && (invMass <= maxMass) ){
+        // limited precision fix
+        invMass -= minMass;
+        // update sums
         sumMass += invMass;
         sumSqMass += pow(invMass,2);
         return true;
