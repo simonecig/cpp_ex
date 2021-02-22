@@ -11,7 +11,6 @@
 #include <cmath>
 
 struct Event;
-struct Particle;
 
 Event* read(std::ifstream &file);
 void dump(const Event &ev);

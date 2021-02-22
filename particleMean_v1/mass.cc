@@ -33,7 +33,7 @@ double computeEnergy(const float px, const float py, const float pz,
 
 // compute invariant mass from momentum x,y,z components and energy
 double computeInvM(const float px, const float py, const float pz,
-                   const float energy) {
+                   const double energy) {
   double ptotSq = pow(px,2) + pow(py,2) + pow(pz,2);
   double msq = pow(energy,2) - ptotSq;
   if(msq > 0)
