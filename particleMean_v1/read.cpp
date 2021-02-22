@@ -5,7 +5,6 @@
 */
 #include <fstream>
 #include "Event.h"
-#include "Particle.h"
 
 Event *read(std::ifstream &file){
     Event *ev;
