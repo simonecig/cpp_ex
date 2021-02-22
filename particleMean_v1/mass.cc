@@ -36,7 +36,10 @@ double computeInvM(const float px, const float py, const float pz,
                    const float energy) {
   double ptotSq = pow(px,2) + pow(py,2) + pow(pz,2);
   double msq = pow(energy,2) - ptotSq;
-  return sqrt(msq);
+  if(msq > 0)
+    return sqrt(msq);
+  else
+    return -1;
 }
 
 const double massPion    = 0.1395706;   // GeV/c^2
