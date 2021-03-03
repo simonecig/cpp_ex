@@ -2,8 +2,6 @@
 #include <fstream>
 #include "Event.h"
 #include "MassMean.h"
-// TODO: dump
-// TODO: delete
 // TODO: fix RMS
 // TODO: doc
 Event *read(std::ifstream &file);

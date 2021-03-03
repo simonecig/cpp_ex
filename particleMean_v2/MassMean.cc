@@ -17,7 +17,7 @@ MassMean::~MassMean() {
 void MassMean::add( const Event& ev ) {
 
     double m= mass(ev);
-    // check for mass being in range
+    // check if mass is in range
     if( (m >= MINMASS) && (m <= MAXMASS) ){
         // precision limit fix
         m -= MINMASS;
@@ -32,11 +32,10 @@ void MassMean::add( const Event& ev ) {
 // compute mean and rms
 void MassMean::compute() {
     mean = sumM*1./acceptedNum;
-    rms = sumMsq*1./acceptedNum - pow(mean,2);
+    rms = sqrt( sumMsq*1./acceptedNum - pow(mean,2) );
     // add back MINMASS
     mean += MINMASS;
 }
-
 
 // return number of selected events
 int MassMean::nEvents() const{ return acceptedNum; }
