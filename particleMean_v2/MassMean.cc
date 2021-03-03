@@ -1,7 +1,7 @@
 #include "MassMean.h"
 #include "Event.h"
 #include <cmath>
-// TODO: check m > 0 before storing value
+
 double mass( const Event& ev );
 
 

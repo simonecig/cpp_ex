@@ -1,8 +1,6 @@
 #ifndef Event_h
 #define Event_h
 
-// TODO: unisgned int
-
 class Event {
 
  public:
@@ -31,7 +29,7 @@ class Event {
     float getZ() const;
 
     // get number of particles
-    int nParticles() const;
+    unsigned int nParticles() const;
 
     // get particle
     part_ptr particle( unsigned int i ) const;

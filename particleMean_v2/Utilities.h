@@ -1,3 +1,7 @@
+/*
+ * Compute the energy or the mass from the 3
+ * momentum components and the mass/energy.
+ *  */
 #ifndef __UTILITIES_H_
 #define __UTILITIES_H_
 

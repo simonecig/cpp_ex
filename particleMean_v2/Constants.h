@@ -1,3 +1,6 @@
+/*
+** Contains the masses of pion, proton, K0 and Lambda0.
+*/
 #ifndef __CONSTANTS_H_
 #define __CONSTANTS_H_
 

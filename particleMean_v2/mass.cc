@@ -1,4 +1,7 @@
-/*
+/* Takes as argument a reference to const-Event
+and returns the invariant mass of the decaying particle for
+which the corresponding difference with the known value
+is the smallest.
  */
 
 #include "Utilities.h"
@@ -12,10 +15,10 @@ double mass(const Event &ev) {
   typedef const Event::Particle* part_ptr;
 
   // variables to loop over particles
-  int i = 0, nPart = ev.nParticles();
+  unsigned int i = 0, nPart = ev.nParticles();
 
   // positive / negative track counters
-  int nPos = 0, nNeg = 0;
+  unsigned int nPos = 0, nNeg = 0;
 
   // variables for momentum sums
   double pxSum = 0, pySum = 0, pzSum = 0;

@@ -51,7 +51,7 @@ float Event::getZ() const{
 }
 
 // get number of particles
-int Event::nParticles() const{
+unsigned int Event::nParticles() const{
   return nPart;
 }
 
