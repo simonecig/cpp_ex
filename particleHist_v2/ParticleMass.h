@@ -8,6 +8,7 @@
 class TH1F;
 class MassMean;
 class Event;
+
 class ParticleMass: public AnalysisSteering {
     public:
         ParticleMass();

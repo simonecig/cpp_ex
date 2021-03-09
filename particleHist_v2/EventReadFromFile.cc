@@ -10,7 +10,7 @@ using namespace std;
 
 // read data from file "name"
 EventReadFromFile::EventReadFromFile( const string& name ) {
-  file = new ifstream( name.c_str(), ios::binary );
+  file = new ifstream(name.c_str());
 }
 
 

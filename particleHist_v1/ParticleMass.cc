@@ -60,7 +60,7 @@ void ParticleMass::process(const Event &ev){
 
 void ParticleMass::pCreate(const std::string& name, float min,
                            float max){
-    int nBins = 10; // TODO: maybe not...
+    int nBins = 100; // TODO: maybe not...
 
     // create and store particle
     Particle *p = new Particle;
