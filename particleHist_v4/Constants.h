@@ -10,6 +10,7 @@ class Constants{
         static double massProton;
         static double massK0;
         static double massLambda0;
+        static double lightVelocity;
 };
 
 #endif // __CONSTANTS_H_

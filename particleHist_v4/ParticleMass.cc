@@ -28,6 +28,7 @@ static ParticleMassFactory er;
 
 
 // TODO: numero bin?????
+// TODO: update does not need Event????
 //
 ParticleMass::ParticleMass(const AnalysisInfo* info):
  AnalysisSteering(info){}
