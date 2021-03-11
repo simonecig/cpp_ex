@@ -33,7 +33,6 @@ void ProperTime::update( const Event& ev ) {
   double p = sqrt(e*e-m*m);
   double d = sqrt(x*x+y*y+z*z);
   time=d*m/(p*Constants::lightVelocity);
-  std::cout << "p\t" << p << std::endl;
   return;
 
 }

@@ -7,7 +7,7 @@
 #include "AnalysisFactory.h"
 #include "AnalysisInfo.h"
 #include "ParticleReco.h"
-
+#include <fstream>
 #include <iostream>
 
 // concrete factory to create a ParticleMass analyzer
@@ -38,8 +38,16 @@ ParticleMass::~ParticleMass(){}
 void ParticleMass::beginJob(){
     // create pointer for 2 decay modes
     pList.reserve(2);
-    pCreate("massK0",0.495, 0.500);
-    pCreate("massLambda0", 1.115, 1.116);
+    std::ifstream file(aInfo->value("mranges").c_str());
+    // read from file
+    std::string name;
+    float eMin;
+    float eMax;
+    while (file >> name >> eMin >> eMax){
+       pCreate("mass"+name,eMin,eMax);
+    }
+    //pCreate("massK0",0.495, 0.500);
+    //pCreate("massLambda0", 1.115, 1.116);
     return;
 }
 

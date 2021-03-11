@@ -7,7 +7,7 @@
 #include "AnalysisFactory.h"
 #include "AnalysisInfo.h"
 #include "ProperTime.h"
-
+#include <fstream>
 #include <iostream>
 
 // TODO: store in same root file
@@ -39,8 +39,20 @@ ParticleLifetime::~ParticleLifetime(){}
 void ParticleLifetime::beginJob(){
     // create pointer for 2 decay modes
     pList.reserve(2);
-    pCreate("timeK0",0.495, 0.500, 10.0,500.0);
-    pCreate("timeLambda0", 1.115, 1.116, 10.0, 1000.0);
+    std::ifstream file(aInfo->value("tranges").c_str());
+    // read from file
+    std::string name;
+    double minMass, maxMass;
+    double minTime, maxTime;
+    double minScan, maxScan, scanStep;
+    while (file >> name >> minMass >> maxMass >>
+           minTime >> maxTime >>
+           minScan >> maxScan >> scanStep){
+        pCreate("time"+name, minMass, maxMass, minTime, maxTime,
+                minScan, maxScan, scanStep);
+    }
+    //pCreate("timeK0",0.495, 0.500, 10.0,500.0);
+    //pCreate("timeLambda0", 1.115, 1.116, 10.0, 1000.0);
     return;
 }
 
@@ -56,7 +68,9 @@ void ParticleLifetime::endJob(){
         part->ltfPtr->compute();
         const unsigned int nPart = part->ltfPtr->nEvents();
         // print
-        std::cout << "n\t" << nPart << "\n";
+        std::cout << "n time \t" << nPart << "\n";
+        std::cout << "time mean \t" << part->ltfPtr->lifeTime()
+                  << "\ntime rms\t" << part->ltfPtr->lifeTimeError()<< std::endl;
         // save TH1F
         part->func->Write();
     }
@@ -80,14 +94,14 @@ void ParticleLifetime::update(const Event &ev){
     }
 }
 
-void ParticleLifetime::pCreate(const std::string& name, float min,
-                           float max, float timeMin, float timeMax){
+void ParticleLifetime::pCreate(const std::string& name, float min, float max,
+                     double minTime, float maxTime, double minScan,
+                               double maxScan, double scanStep){
     int nBins = 100; // TODO: maybe not...
-
     // create and store particle
     Particle *p = new Particle;
-    p->ltfPtr = new LifetimeFit(min,max);
-    p->func = new TH1F(&name[0], &name[0], nBins,timeMin, timeMax);
+    p->ltfPtr = new LifetimeFit(min,max, minTime, maxTime, minScan, maxScan, scanStep);
+    p->func = new TH1F(&name[0], &name[0], nBins,minTime, maxTime);
     pList.push_back(p);
 
 }

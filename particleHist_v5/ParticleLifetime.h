@@ -38,7 +38,8 @@ class ParticleLifetime: public AnalysisSteering,
         std::vector<Particle*> pList;
 
         void pCreate(const std::string& name, float min, float max,
-                             float timeMin, float timeMax);
+                     double minTime, float maxTime, double minScan,
+                     double maxScan, double scanStep);
 
 };
 
