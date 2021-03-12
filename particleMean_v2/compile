@@ -1,0 +1,2 @@
+rm -f ex
+g++ -Wall -o ex *.cc
