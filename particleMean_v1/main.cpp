@@ -1,8 +1,9 @@
 /*
 ** Create a function "main" taking the file name from the command string,
-** reading the file in an event loop. Compute the number of events by
-** increasing the counter according to the return value of the add
-** function and compute the mean and rms mass from the sum of masses and saquares.
+** reading the file in an event loop.
+** Compute the number of events by increasing the counter according to
+** the return value of the add function and compute the mean and rms
+** mass from the sum of masses and saquares.
 ** Print the result on the screen.
 * */
 
@@ -44,7 +45,8 @@ int main(int argc, char *argv[]) {
     Event* ev;
     while( (ev = read(file)) != nullptr){
         //dump(*ev);
-        if( add(*ev, MINMASS, MAXMASS, sumInvMass, sumSqInvMass) )
+        // add event and compute mass if in range
+        if(add(*ev, MINMASS, MAXMASS, sumInvMass, sumSqInvMass))
             acceptedEvNum++;
         clear(ev);
     }

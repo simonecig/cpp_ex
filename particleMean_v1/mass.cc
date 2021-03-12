@@ -1,25 +1,13 @@
 /*
-** Create a "mass" function taking as argument a reference to const-Event
-and returning the invariant mass of the decaying particle.
 Loop over the particles, and for each one:
 - increase the corresponding counter, according to charge,
 - increase the 3 momentum components sum,
 - compute particle energy for the hypothesis of a decaying K0,
-  using the function described above and giving as arguments the 3 momentum
-  components and the pion mass,
 - compute particle energy for the hypothesis of a decaying Lambda0,
-  using the function described above and giving as arguments the 3 momentum
-  components and the pion mass for a negative particle or proton mass
-  for a positive particle,
 - update the total energy sum for both the K0 and Lambda0 hypotheses.
-Check the number of positive and negative particles, and return a
-negative (unphysical) value if one of the two is different than one.
 Compute the invariant mass for both the K0 and Lambda0 hypotheses, and
-compute the difference of each one with the known mass of the K0 or Lambda0
-respectively. Return the invariant mass for which the corresponding
-difference is the smallest.
-
- */
+return the invariant mass closest to the known value.
+*/
 
 #include "Event.h"
 #include <cmath>
@@ -32,8 +20,8 @@ double computeEnergy(const float px, const float py, const float pz,
 }
 
 // compute invariant mass from momentum x,y,z components and energy
-double computeInvM(const float px, const float py, const float pz,
-                   const double energy) {
+double computeInvM(float px, float py, float pz,
+                   double energy) {
   double ptotSq = pow(px,2) + pow(py,2) + pow(pz,2);
   double msq = pow(energy,2) - ptotSq;
   if(msq > 0)
@@ -42,27 +30,24 @@ double computeInvM(const float px, const float py, const float pz,
     return -1;
 }
 
+// constants
 const double massPion    = 0.1395706;   // GeV/c^2
 const double massProton  = 0.938272;    // GeV/c^2
 const double massK0      = 0.497611;    // GeV/c^2
 const double massLambda0 = 1.115683;    // GeV/c^2
 
 double mass(const Event &ev) {
-
   // retrieve particles in the event
   typedef const Particle* part_ptr;
   const part_ptr* particles = ev.p;
 
   // variables to loop over particles
   int i = 0, nPart = ev.nPart;
-
   // positive / negative track counters
   int nPos = 0, nNeg = 0;
-
-  // variables for momentum sums
+  // momentum sums
   double pxSum = 0, pySum = 0, pzSum = 0;
-
-  // variables for energy sums, for K0 and Lambda0
+  // energy sums, for K0 and Lambda0
   double enSumK = 0, enSumL = 0;
 
   // loop over particles

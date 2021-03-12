@@ -1,3 +1,9 @@
+/*
+**  Compute inveriant mass of the decay particle
+**  Check if it's in range (if not return false)
+**  Update sums
+**  Return true
+*/
 #include <cmath>
 #include "Event.h"
 
@@ -19,6 +25,5 @@ bool add(const Event &ev, float minMass, float maxMass,
         sumSqMass += pow(invMass,2);
         return true;
     }
-    else
-        return false;
+    return false;
 }
