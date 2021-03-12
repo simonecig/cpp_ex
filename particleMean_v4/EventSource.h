@@ -1,3 +1,6 @@
+/*
+** Abstract event source
+*/
 #ifndef EventSource_h
 #define EventSource_h
 

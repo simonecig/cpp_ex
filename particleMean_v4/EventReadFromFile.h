@@ -2,10 +2,10 @@
 #define EventReadFromFile_h
 
 #include "EventSource.h"
-
 #include <iostream>
 #include <fstream>
 #include <string>
+
 class Event;
 
 class EventReadFromFile: public EventSource {

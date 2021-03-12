@@ -3,8 +3,6 @@
 #include "MassMean.h"
 #include <iostream>
 
-//TODO: print number of selected events maybe?
-
 ParticleMass::ParticleMass(){}
 ParticleMass::~ParticleMass(){}
 
@@ -22,7 +20,8 @@ void ParticleMass::endJob(){
         mMean->compute();
         const double mean = mMean->mMean();
         const double rms = mMean->mRMS();
-        std::cout << mean << " " << rms << std::endl;
+        std::cout << "mean\t" << mean
+                  << "\nrms\t" << rms << std::endl;
     }
     return;
 }

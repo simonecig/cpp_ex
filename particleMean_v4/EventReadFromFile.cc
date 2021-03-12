@@ -1,5 +1,4 @@
 #include "EventReadFromFile.h"
-
 #include "Event.h"
 
 #include <iostream>
@@ -10,14 +9,11 @@ using namespace std;
 
 // read data from file "name"
 EventReadFromFile::EventReadFromFile( const string& name ) {
-  file = new ifstream( name.c_str(), ios::binary );
+  file = new ifstream(name.c_str());
 }
 
 
-EventReadFromFile::~EventReadFromFile() {
-  delete file;
-}
-
+EventReadFromFile::~EventReadFromFile() { delete file; }
 
 // get an event
 const Event* EventReadFromFile::get() {
@@ -31,6 +27,7 @@ const Event* EventReadFromFile::readFile() {
   int evNumber=0;
   unsigned int nPart=0;
   float x=0, y=0, z=0;
+
   // try to read the event id
   if(!(*file >> evNumber))
       return nullptr; // on fail leave the function
