@@ -3,8 +3,6 @@
 ** reading the file and calling the dump and clear functions.
 */
 
-//  TODO fix redundant imports
-
 #include <iostream>
 #include <fstream>
 #include "Event.h"
@@ -29,7 +27,7 @@ int main(int argc, char *argv[]) {
 
     // loop over events
     Event* ev;
-    while( (ev = read(file)) != nullptr){
+    while( (ev = read(file)) != nullptr ){
         dump(*ev);
         clear(ev);
     }

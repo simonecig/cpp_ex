@@ -12,7 +12,6 @@ struct Particle{
 };
 
 struct Event{
-  // event variables
     int evNum;
     float x, y,z;
     int nPart;
