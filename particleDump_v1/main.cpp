@@ -1,13 +1,7 @@
 /*
-** Create a "main" function taking the file name from the
-** command string, opening the file and calling the read
-** and dump functions.
-** Dimension the arrays in the "main" using 10 as max number
-** of particles.
-** For each event try to read the event identifier in the
-** main and on success call the read function to read
-** the other data and then call the "dump" function.
-**
+** Create a ~main~ function taking the file name from the
+** command string, opening the file, reading the events
+** and dumping them on the screen.
 */
 
 #include <iostream>
@@ -17,8 +11,8 @@ int read(std::ifstream &file, float &x, float &y, float &z,
           int *charge, float *px, float *py, float *pz);
 
 void dump(int evNum, int nPart, float x, float y, float z,
-          const int *charge,
-          const float *px, const float *py, const float *pz);
+          int *charge,
+          float *px, float *py, float *pz);
 
 int main(int argc, char *argv[]) {
     const char* fname = argv[1];

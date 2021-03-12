@@ -1,11 +1,13 @@
 /*
-** Create a function "read" taking as arguments
-** - the reference to an input file stream
-** - the reference to 3 floats to fill with the decay point
-**   coordinates
-** - an array of integers to fill with electric charges
-** - 3 arrays of float to fill with momenta components
-** and returning the number of particles
+** Create a function ~read~ to get event data from ~file~.
+** The file must contain, for each event:
+** - identifier (already stored in ~main~)
+** - 3 the decay point coordinates
+** - number of particles
+** - for each particle:
+**   - electric charge
+**   - 3 momentum components
+** Returns the number of particles
 */
 #include <fstream>
 
