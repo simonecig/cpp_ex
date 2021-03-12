@@ -4,19 +4,15 @@
 
 double mass( const Event& ev );
 
-
 MassMean::MassMean( float min, float max ):
     MINMASS(min), MAXMASS(max) {}
 
-
-MassMean::~MassMean() {
-}
+MassMean::~MassMean() {}
 
 
 // add data from a new event
 void MassMean::add( const Event& ev ) {
-
-    double m= mass(ev);
+    double m = mass(ev);
     // check if mass is in range
     if( (m >= MINMASS) && (m <= MAXMASS) ){
         // precision limit fix

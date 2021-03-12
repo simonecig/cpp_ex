@@ -2,7 +2,7 @@
 and returns the invariant mass of the decaying particle for
 which the corresponding difference with the known value
 is the smallest.
- */
+*/
 
 #include "Utilities.h"
 #include "Constants.h"
@@ -10,19 +10,15 @@ is the smallest.
 #include <cmath>
 
 double mass(const Event &ev) {
-
   // retrieve particles in the event
   typedef const Event::Particle* part_ptr;
 
   // variables to loop over particles
   unsigned int i = 0, nPart = ev.nParticles();
-
   // positive / negative track counters
   unsigned int nPos = 0, nNeg = 0;
-
   // variables for momentum sums
   double pxSum = 0, pySum = 0, pzSum = 0;
-
   // variables for energy sums, for K0 and Lambda0
   double enSumK = 0, enSumL = 0;
 

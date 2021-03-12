@@ -5,8 +5,7 @@ class Event {
 
  public:
 
-    Event( int id, float x, float y, float z ); // create an event with number "n"
-                                              // and coordinates x, y, z
+    Event( int id, float x, float y, float z );
     ~Event();
 
     // composite object Particle to hold all information for each particle

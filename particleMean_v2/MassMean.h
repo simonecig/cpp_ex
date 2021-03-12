@@ -1,3 +1,7 @@
+/*
+** Class to compute statistics
+ */
+
 #ifndef MassMean_h
 #define MassMean_h
 

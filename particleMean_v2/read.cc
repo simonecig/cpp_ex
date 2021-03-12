@@ -12,6 +12,7 @@ Event *read(std::ifstream &file){
     int evNumber=0;
     unsigned int nPart=0;
     float x=0, y=0, z=0;
+
     // try to read the event id
     if(!(file >> evNumber))
         return nullptr; // on fail leave the function
@@ -19,6 +20,7 @@ Event *read(std::ifstream &file){
     // read the point coordinates and the number of particles
     file >> x >> y >> z >> nPart;
     ev = new Event(evNumber, x, y, z);
+
     //for each particle read the charge and the 3 momentums
     for(unsigned int i=0;i<nPart;i++){
         int charge=0;
