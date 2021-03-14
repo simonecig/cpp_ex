@@ -26,14 +26,17 @@ class ParticleMass: public AnalysisSteering {
         void process(const Event &ev) override;
 
     private:
+        // struct to hold particle info
         struct Particle{
                 std::string name;
                 MassMean* mmPtr;
                 TH1F *func;
         };
 
+        // paritcle list
         std::vector<Particle*> pList;
 
+        // create decay mode
         void pCreate(const std::string& name, float min, float max);
 
 };

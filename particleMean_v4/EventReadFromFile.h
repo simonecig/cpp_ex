@@ -2,7 +2,6 @@
 #define EventReadFromFile_h
 
 #include "EventSource.h"
-#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -28,7 +27,7 @@ class EventReadFromFile: public EventSource {
   // input file
   std::ifstream* file;
 
-  // read and event
+  // read an event
   const Event* readFile();
 
 };

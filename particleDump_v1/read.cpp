@@ -7,8 +7,8 @@
 ** - for each particle:
 **   - electric charge
 **   - 3 momentum components
-** Returns the number of particles
 */
+
 #include <fstream>
 
 int read(std::ifstream &file, float &x, float &y, float &z,

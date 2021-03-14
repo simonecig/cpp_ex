@@ -27,9 +27,6 @@ class ParticleMassFactory: public AnalysisFactory::AbsFactory {
 static ParticleMassFactory er;
 
 
-// TODO: numero bin?????
-// TODO: update does not need Event????
-//
 ParticleMass::ParticleMass(const AnalysisInfo* info):
  AnalysisSteering(info){}
 
@@ -94,7 +91,7 @@ void ParticleMass::update(const Event &ev){
 
 void ParticleMass::pCreate(const std::string& name, float min,
                            float max){
-    int nBins = 100; // TODO: maybe not...
+    int nBins = 100;
 
     // create and store particle
     Particle *p = new Particle;

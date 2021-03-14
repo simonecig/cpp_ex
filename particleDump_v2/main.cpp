@@ -1,8 +1,3 @@
-/*
-** Create a function "main" taking the file name from the command string,
-** reading the file and calling the dump and clear functions.
-*/
-
 #include <iostream>
 #include <fstream>
 #include "Event.h"

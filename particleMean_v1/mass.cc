@@ -1,12 +1,8 @@
 /*
-Loop over the particles, and for each one:
-- increase the corresponding counter, according to charge,
-- increase the 3 momentum components sum,
-- compute particle energy for the hypothesis of a decaying K0,
-- compute particle energy for the hypothesis of a decaying Lambda0,
-- update the total energy sum for both the K0 and Lambda0 hypotheses.
-Compute the invariant mass for both the K0 and Lambda0 hypotheses, and
-return the invariant mass closest to the known value.
+Loop over the particles, and for each one
+compute the invariant mass for both the K0 and
+Lambda0 hypotheses
+Return the invariant mass closest to the known value.
 */
 
 #include "Event.h"

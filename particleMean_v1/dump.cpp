@@ -1,16 +1,14 @@
-/* Create a function "dump" taking as argument a reference to
- * const-event and printing a dump on the screen
- * */
+/* Create a function ~dump~ to print event data on screen */
 
 #include <iostream>
 #include "Event.h"
-//#include "Particle.h"
 
 void dump(const Event &ev){
-    // print the event
+    // print event data on screen
     std::cout << ev.evNum << std::endl
               << ev.x << ' ' << ev.y << ' ' << ev.z << std::endl
               << ev.nPart << std::endl;
+
     // for each particle print its data
     for(int i  = 0; i < ev.nPart; i++){
       std::cout << ev.p[i]->charge << ' '

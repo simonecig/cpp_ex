@@ -1,6 +1,4 @@
-/* Create a function "dump" taking as argument a reference to
- * const-event and printing a dump on the screen
- * */
+/* Create a function ~dump~ to print event data on screen */
 
 #include <iostream>
 #include "Event.h"

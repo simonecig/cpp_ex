@@ -1,14 +1,21 @@
 /*
-** Create a function "read" taking as argument an input file
-** stream, reading an event and returning a pointer to the event
-** or a null pointer.
+** Create a function ~read~ to get event data from ~file~.
+** The file must contain, for each event:
+** - identifier (already stored in ~main~)
+** - 3 the decay point coordinates
+** - number of particles
+** - for each particle:
+**   - electric charge
+**   - 3 momentum components
 */
+
 #include <fstream>
 #include "Event.h"
 
 Event *read(std::ifstream &file){
     Event *ev;
     int evNumber = 0;
+
     // try to read the event id
     if(file >> evNumber)
         ev = new Event; // on success create a new event

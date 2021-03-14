@@ -7,7 +7,8 @@
 Event *read(std::ifstream &file);
 
 int main( int argc, char* argv[] ) {
-  // get file name
+
+    // get file name
     const std::string fname = argv[1];
 
     // check if file exists

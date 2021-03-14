@@ -1,9 +1,3 @@
-/*
-** Create a ~main~ function taking the file name from the
-** command string, opening the file, reading the events
-** and dumping them on the screen.
-*/
-
 #include <iostream>
 #include <fstream>
 
@@ -15,6 +9,7 @@ void dump(int evNum, int nPart, float x, float y, float z,
           float *px, float *py, float *pz);
 
 int main(int argc, char *argv[]) {
+    // get file name
     const char* fname = argv[1];
 
     // event variables

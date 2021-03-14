@@ -9,6 +9,7 @@
 Event *read(std::ifstream &file){
     Event *ev;
     int evNumber = 0;
+
     // try to read the event id
     if(file >> evNumber)
         ev = new Event; // on success create a new event

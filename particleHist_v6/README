@@ -1,0 +1,71 @@
+********************
+runDump <command> [argument] ...
+COMMANDS
+    sim {n}
+        Simulate {n} events
+    input {filename.txt}
+        Read events from {filename.txt}
+    dump
+        Prints the events on the standard output
+
+********************
+runMass <command> [argument]
+COMMANDS
+    sim {n}
+        Simulate {n} events
+    input {filename.txt}
+        Read events from {filename.txt}
+    plot {fname.root}
+        Create a histogram for the masses of both hypotesis
+        The hystogram is stored in a root file called {fname.root}. 
+        If the file already exists, no file is created.
+    mranges {fname.txt}
+        Import accepted mass ranges from the file {fname.txt}
+
+********************
+runTime <command> [argument] ...
+COMMANDS
+    sim {n}
+        Simulate {n} events
+    input {filename.txt}
+        Read events from {filename.txt}
+    time {fname.root}
+        Create a histogram for the decaying times of both hypotesis
+        The hystogram is stored in a root file called {fname.root}. 
+        If the file already exists, no file is created.
+    tranges {fname.txt}
+        Import accepted time ranges and fit parameters from the file {fname.txt}. 
+        
+********************
+runAll <command> [argument] ...
+COMMANDS
+    sim {n}
+        Simulate {n} events
+    input {filename.txt}
+        Read events from {filename.txt}
+    dump
+        Prints the events on the standard output
+    time {fname.root}
+        Create a histogram for the decaying times of both hypotesis
+        The hystogram is stored in a root file called {fname.root}. 
+        If the file already exists, no file is created.
+    tranges {fname.txt}
+        Import accepted time ranges and fit parameters from the file {fname.txt}. 
+    plot {fname.root}
+        Create a histogram for the masses of both hypotesis
+        The hystogram is stored in a root file called {fname.root}. 
+        If the file already exists, no file is created.
+    mranges {fname.txt}
+        Import accepted mass ranges from the file {fname.txt}
+       
+********************
+EXAMPLES
+    Example 1. runDump
+        ./runDump sim 300 dump
+        Simulates 300 events and prints the results on the standard output
+    Example 2. runMass
+        ./runMass input ../particle_events.txt plot massHist.root mranges massRanges
+    Example 3. runTime
+        ./runTime sim 1000 time decayHist.root tranges particleFitters
+    Example 4. runAll
+        ./runAll input ../particle_events.txt plot m.root mranges massRanges time t.root tranges particleFitters dump

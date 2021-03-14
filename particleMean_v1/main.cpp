@@ -1,12 +1,3 @@
-/*
-** Create a function "main" taking the file name from the command string,
-** reading the file in an event loop.
-** Compute the number of events by increasing the counter according to
-** the return value of the add function and compute the mean and rms
-** mass from the sum of masses and saquares.
-** Print the result on the screen.
-* */
-
 #include <iostream>
 #include <fstream>
 #include <cmath>

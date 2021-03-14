@@ -1,7 +1,8 @@
-/* Takes as argument a reference to const-Event
-and returns the invariant mass of the decaying particle for
-which the corresponding difference with the known value
-is the smallest.
+/*
+Loop over the particles, and for each one
+compute the invariant mass for both the K0 and
+Lambda0 hypotheses
+Return the invariant mass closest to the known value.
 */
 
 #include "Utilities.h"

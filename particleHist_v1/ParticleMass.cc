@@ -7,7 +7,7 @@
 #include "TH1F.h"
 
 double mass( const Event& ev );
-// TODO: numero bin?????
+
 ParticleMass::ParticleMass(){}
 ParticleMass::~ParticleMass(){}
 
@@ -20,11 +20,10 @@ void ParticleMass::beginJob(){
 }
 
 void ParticleMass::endJob(){
-
     // save current working area
     TDirectory* currentDir = gDirectory;
     // open histogram file
-    TFile* file = new TFile("hist.root", "RECREATE");
+    TFile* file = new TFile("hist.root", "CREATE");
 
     // for each MassMean compute and print mean, rms
     for(auto part: pList){
@@ -45,6 +44,9 @@ void ParticleMass::endJob(){
     file->Close();
     delete file;
 
+    // restore working area
+    currentDir->cd();
+
     return;
 }
 
@@ -60,7 +62,7 @@ void ParticleMass::process(const Event &ev){
 
 void ParticleMass::pCreate(const std::string& name, float min,
                            float max){
-    int nBins = 100; // TODO: maybe not...
+    int nBins = 100;
 
     // create and store particle
     Particle *p = new Particle;

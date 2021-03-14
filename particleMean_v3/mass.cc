@@ -1,8 +1,9 @@
-/* Takes as argument a reference to const-Event
-and returns the invariant mass of the decaying particle for
-which the corresponding difference with the known value
-is the smallest.
- */
+/*
+Loop over the particles, and for each one
+compute the invariant mass for both the K0 and
+Lambda0 hypotheses
+Return the invariant mass closest to the known value.
+*/
 
 #include "Utilities.h"
 #include "Constants.h"
@@ -35,8 +36,7 @@ double mass(const Event &ev) {
     pxSum += particle->px;
     pySum += particle->py;
     pzSum += particle->pz;
-
-    // update energy sums, for K0 and Lambda0 hypotheses
+// update energy sums, for K0 and Lambda0 hypotheses
     enSumK += Utilities::computeEnergy(particle->px, particle->py,
                                        particle->pz, Constants::massPion);
     if(particle->charge > 0){

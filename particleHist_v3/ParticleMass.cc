@@ -27,8 +27,6 @@ static ParticleMassFactory er;
 
 double mass( const Event& ev );
 
-// TODO: numero bin?????
-//
 ParticleMass::ParticleMass(const AnalysisInfo* info):
  AnalysisSteering(info){}
 
@@ -84,7 +82,7 @@ void ParticleMass::process(const Event &ev){
 
 void ParticleMass::pCreate(const std::string& name, float min,
                            float max){
-    int nBins = 100; // TODO: maybe not...
+    int nBins = 100;
 
     // create and store particle
     Particle *p = new Particle;

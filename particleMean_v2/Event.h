@@ -35,16 +35,16 @@ class Event {
 
  private:
 
-  // event-specific informations:
-  int evNum; // event id
-  float x, y, z; // decay point
+    // event-specific informations:
+    int evNum; // event id
+    float x, y, z; // decay point
 
-  // particles: number and array of pointers
-  unsigned int nPart;
-  Particle **p;
+    // particles: number and array of pointers
+    unsigned int nPart;
+    Particle **p;
 
-  // maximum number of particles
-  const unsigned int MAXPART = 10;
+    // maximum number of particles
+    const unsigned int MAXPART = 10;
 };
 
 #endif

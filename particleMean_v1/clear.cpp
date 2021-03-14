@@ -3,7 +3,6 @@
 ** all the particles.
 */
 #include "Event.h"
-//#include "Particle.h"
 
 void clear(const Event *ev){
     // delete all the Particle structs

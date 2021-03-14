@@ -10,8 +10,6 @@
 #include <fstream>
 #include <iostream>
 
-// TODO: store in same root file
-
 // concrete factory to create a ParticleLifetime analyzer
 class ParticleLifetimeFactory: public AnalysisFactory::AbsFactory {
  public:
@@ -29,8 +27,6 @@ class ParticleLifetimeFactory: public AnalysisFactory::AbsFactory {
 static ParticleLifetimeFactory er;
 
 
-// TODO: numero bin?????
-//
 ParticleLifetime::ParticleLifetime(const AnalysisInfo* info):
  AnalysisSteering(info){}
 
@@ -97,7 +93,7 @@ void ParticleLifetime::update(const Event &ev){
 void ParticleLifetime::pCreate(const std::string& name, float min, float max,
                      double minTime, float maxTime, double minScan,
                                double maxScan, double scanStep){
-    int nBins = 100; // TODO: maybe not...
+    int nBins = 100;
     // create and store particle
     Particle *p = new Particle;
     p->ltfPtr = new LifetimeFit(min,max, minTime, maxTime, minScan, maxScan, scanStep);

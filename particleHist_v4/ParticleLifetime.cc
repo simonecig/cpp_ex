@@ -29,8 +29,6 @@ class ParticleLifetimeFactory: public AnalysisFactory::AbsFactory {
 static ParticleLifetimeFactory er;
 
 
-// TODO: numero bin?????
-//
 ParticleLifetime::ParticleLifetime(const AnalysisInfo* info):
  AnalysisSteering(info){}
 
@@ -82,7 +80,7 @@ void ParticleLifetime::update(const Event &ev){
 
 void ParticleLifetime::pCreate(const std::string& name, float min,
                            float max, float timeMin, float timeMax){
-    int nBins = 100; // TODO: maybe not...
+    int nBins = 100;
 
     // create and store particle
     Particle *p = new Particle;

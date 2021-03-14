@@ -2,13 +2,12 @@
 #include <fstream>
 #include "Event.h"
 #include "MassMean.h"
-// TODO: fix RMS
-// TODO: doc
+
 Event *read(std::ifstream &file);
 
 int main( int argc, char* argv[] ) {
 
-  // get file name
+    // get file name
     const char* fname = argv[1];
 
     // check if file exists
