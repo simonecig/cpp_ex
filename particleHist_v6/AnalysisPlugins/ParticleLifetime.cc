@@ -4,6 +4,7 @@
 #include "../AnalysisFramework/Event.h"
 #include "TFile.h"
 #include "TH1F.h"
+#include "util/include/TFileProxy.h"
 #include "../AnalysisFramework/AnalysisFactory.h"
 #include "../AnalysisFramework/AnalysisInfo.h"
 #include "../AnalysisObjects/ProperTime.h"
@@ -56,8 +57,12 @@ void ParticleLifetime::endJob(){
 
     // save current working area
     TDirectory* currentDir = gDirectory;
+
+    std::string fname = "histo.root";
+    // check if user has defined a name
+    if(aInfo->contains("plot")) fname = aInfo->value("plot");
     // open histogram file
-    TFile* file = new TFile(aInfo->value("time").c_str(), "CREATE");
+    TFileProxy* file = new TFileProxy(fname.c_str(), "CREATE");
 
     for(auto part: pList){
         // compute
@@ -93,7 +98,27 @@ void ParticleLifetime::update(const Event &ev){
 void ParticleLifetime::pCreate(const std::string& name, float min, float max,
                      double minTime, float maxTime, double minScan,
                                double maxScan, double scanStep){
-    int nBins = 100;
+    // get number of bins
+    int nBins=100;
+    // check for user specified value
+    if(aInfo->contains("nbins")){
+        // try to convert string to int
+        try{
+            int choice = std::stoi(aInfo->value("nbins"));
+            // if choice is negative throw the invalid_argument exception
+            if(choice > 0) nBins = choice;
+            else throw(std::invalid_argument("negativeValue"));
+
+        }
+        // on fail keep the default value
+        catch (std::invalid_argument &e){
+            std::cout << "nBins invalid. Using " << nBins
+                      << " instead." << std::endl;
+            // change "nbins" value to prevent multiple throws
+            aInfo->setValue("nbins",std::to_string(nBins));
+        }
+    }
+
     // create and store particle
     Particle *p = new Particle;
     p->ltfPtr = new LifetimeFit(min,max, minTime, maxTime, minScan, maxScan, scanStep);

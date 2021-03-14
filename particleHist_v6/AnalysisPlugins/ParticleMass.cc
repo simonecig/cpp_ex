@@ -7,6 +7,7 @@
 #include "../AnalysisFramework/AnalysisFactory.h"
 #include "../AnalysisFramework/AnalysisInfo.h"
 #include "../AnalysisObjects/ParticleReco.h"
+#include "util/include/TFileProxy.h"
 #include <fstream>
 #include <iostream>
 
@@ -14,7 +15,7 @@
 class ParticleMassFactory: public AnalysisFactory::AbsFactory {
  public:
   // assign "plot" as name for this analyzer and factory
-  ParticleMassFactory(): AnalysisFactory::AbsFactory( "plot" ) {}
+  ParticleMassFactory(): AnalysisFactory::AbsFactory( "mass" ) {}
   // create a ParticleMass when builder is run
   AnalysisSteering* create( const AnalysisInfo* info ) override {
     return new ParticleMass(info);
@@ -43,8 +44,6 @@ void ParticleMass::beginJob(){
     while (file >> name >> eMin >> eMax){
        pCreate("mass"+name,eMin,eMax);
     }
-    //pCreate("massK0",0.495, 0.500);
-    //pCreate("massLambda0", 1.115, 1.116);
     return;
 }
 
@@ -52,8 +51,12 @@ void ParticleMass::endJob(){
 
     // save current working area
     TDirectory* currentDir = gDirectory;
+
+    std::string fname = "histo.root";
+    // check if user has defined a name
+    if(aInfo->contains("plot")) fname = aInfo->value("plot");
     // open histogram file
-    TFile* file = new TFile(aInfo->value("plot").c_str(), "CREATE");
+    TFileProxy* file = new TFileProxy(fname.c_str(), "CREATE");
 
     // for each MassMean compute and print mean, rms
     for(auto part: pList){
@@ -91,8 +94,26 @@ void ParticleMass::update(const Event &ev){
 
 void ParticleMass::pCreate(const std::string& name, float min,
                            float max){
-    int nBins = 100;
+    // get number of bins
+    int nBins=100;
+    // check for user specified value
+    if(aInfo->contains("nbins")){
+        // try to convert string to int
+        try{
+            int choice = std::stoi(aInfo->value("nbins"));
+            // if choice is negative throw the invalid_argument exception
+            if(choice > 0) nBins = choice;
+            else throw(std::invalid_argument("negativeValue"));
 
+        }
+        // on fail keep the default value
+        catch (std::invalid_argument &e){
+            std::cout << "nBins invalid. Using " << nBins
+                      << " instead." << std::endl;
+            // change "nbins" value to prevent multiple throws
+            aInfo->setValue("nbins",std::to_string(nBins));
+        }
+    }
     // create and store particle
     Particle *p = new Particle;
     p->mmPtr = new MassMean(min,max);

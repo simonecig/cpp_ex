@@ -15,12 +15,19 @@ COMMANDS
         Simulate {n} events
     input {filename.txt}
         Read events from {filename.txt}
-    plot {fname.root}
-        Create a histogram for the masses of both hypotesis
-        The hystogram is stored in a root file called {fname.root}. 
+    mass 
+        Calculate mean masses and rms for both hypotesis and create a histogram.
+        Unless the command <plot> is used to specify a file name, the 
+        histogram is stored in a root file called hist.root. 
         If the file already exists, no file is created.
+    plot {fname.root}
+        Specify the name for the root file 
     mranges {fname.txt}
         Import accepted mass ranges from the file {fname.txt}
+    nBins {n}
+        Draw the histogram with {n} bins. 
+        {n} must be a postive integer.
+        Default value is 100.
 
 ********************
 runTime <command> [argument] ...
@@ -30,12 +37,19 @@ COMMANDS
     input {filename.txt}
         Read events from {filename.txt}
     time {fname.root}
-        Create a histogram for the decaying times of both hypotesis
-        The hystogram is stored in a root file called {fname.root}. 
+        Calculate mean decaying time and rms for both hypotesis and create a histogram.
+        Unless the command <plot> is used to specify a file name, the 
+        histogram is stored in a root file called hist.root. 
         If the file already exists, no file is created.
+    plot {fname.root}
+        Specify the name for the root file 
     tranges {fname.txt}
         Import accepted time ranges and fit parameters from the file {fname.txt}. 
-        
+    nBins {n}
+        Draw the histogram with {n} bins. 
+        {n} must be a postive integer.
+        Default value is 100.
+
 ********************
 runAll <command> [argument] ...
 COMMANDS
@@ -46,26 +60,34 @@ COMMANDS
     dump
         Prints the events on the standard output
     time {fname.root}
-        Create a histogram for the decaying times of both hypotesis
-        The hystogram is stored in a root file called {fname.root}. 
+        Calculate mean decaying time and rms for both hypotesis and create a histogram.
+        Unless the command <plot> is used to specify a file name, the 
+        histogram is stored in a root file called hist.root. 
         If the file already exists, no file is created.
     tranges {fname.txt}
         Import accepted time ranges and fit parameters from the file {fname.txt}. 
-    plot {fname.root}
-        Create a histogram for the masses of both hypotesis
-        The hystogram is stored in a root file called {fname.root}. 
+    mass 
+        Calculate mean masses and rms for both hypotesis and create a histogram.
+        Unless the command <plot> is used to specify a file name, the 
+        histogram is stored in a root file called hist.root. 
         If the file already exists, no file is created.
     mranges {fname.txt}
         Import accepted mass ranges from the file {fname.txt}
-       
+    plot {fname.root}
+        Specify the name for the root file (<time> and <mass> both)
+    nBins {n}
+        Draw the histogram with {n} bins. 
+        {n} must be a postive integer.
+        Default value is 100.
+   
 ********************
 EXAMPLES
     Example 1. runDump
         ./runDump sim 300 dump
         Simulates 300 events and prints the results on the standard output
     Example 2. runMass
-        ./runMass input ../particle_events.txt plot massHist.root mranges massRanges
+        ./runMass input ../particle_events.txt mass mranges massRanges nBins 10
     Example 3. runTime
-        ./runTime sim 1000 time decayHist.root tranges particleFitters
+        ./runTime sim 1000 time plot decayHist.root tranges particleFitters
     Example 4. runAll
-        ./runAll input ../particle_events.txt plot m.root mranges massRanges time t.root tranges particleFitters dump
+        ./runAll input ../particle_events.txt mass time plot massTimeH.root mranges massRanges tranges particleFitters dump nBins 10

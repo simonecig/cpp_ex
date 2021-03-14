@@ -48,3 +48,13 @@ bool AnalysisInfo::contains( const string& key ) const {
   return false;
 }
 
+// set new value for a 'key'
+void AnalysisInfo::setValue(std::string key, std::string value) const{
+  int i = 0;
+  int n = args.size()-1;
+  while(i < n){
+    // if word is equal to key, return next word
+    if(args[i++] == key) args[i] = value;
+  }
+  return;
+}

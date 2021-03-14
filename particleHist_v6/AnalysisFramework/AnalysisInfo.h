@@ -23,11 +23,12 @@ class AnalysisInfo {
   const std::string& value( const std::string& key ) const;
   // check if the word 'key' is present
   bool contains( const std::string& key ) const;
-
+  // set new value for a 'key'
+  void setValue(std::string key, std::string value) const;
  private:
 
   // container for words
-  std::vector<std::string> args;
+  mutable std::vector<std::string> args;
   // value to return for keys not found
   static std::string defaultString;
 
